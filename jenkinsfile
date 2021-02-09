@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    parameters{
+        choice(name:'VERSION',choices:['1','2','3'],description:'Version to run')
+    }
+    stages{
+        stage('Build Stage'){
+            when{
+                expression{params.VERSION == '1'}
+            }
+            steps{
+                echo "buildng version ${VERSION}"
+                input('proceed?')
+                echo 'Build Job'
+            }
+        }
+    }
+    post{
+        success{
+            echo 'Build Successful'
+        }
+    }
+
+   
+   
+    }
+    
